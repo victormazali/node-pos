@@ -1,0 +1,8 @@
+npm init -y
+npm install express
+npm install nodemon –d
+npm install mongoose
+npm install body-parser
+
+
+Babel : javascript antigo => JS6
