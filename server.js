@@ -17,9 +17,10 @@ const port = process.env.PORT || 3000;
 
 //Definindo as rotas
 const router = express.Router(); //intercepta todas as rotas
-const productRoute = require('./routes/product-route');
-const indexRoute = require('./routes/index-route');
-const categoryRoute = require('./routes/category-route');
+const productRoute = require('./src/routes/product-route');
+const indexRoute = require('./src/routes/index-route');
+const categoryRoute = require('./src/routes/category-route');
+const customerRoute = require('./src/routes/customer-route');
 
 //VIncular a aplicação (app) com o motor de rotas
 // '/api' é o caminho padrão para as APIs REST
@@ -29,6 +30,7 @@ app.use('/api', indexRoute);
 //rota para produto
 app.use('/api/produtos/', productRoute);
 app.use('/api/categorias/', categoryRoute);
+app.use('/api/customers/', customerRoute);
 
 app.listen(port, () => {
   console.log("server is up and running...on port ". port);

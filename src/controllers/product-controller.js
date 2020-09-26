@@ -1,12 +1,7 @@
-const express = require('express');
-const router = express.Router();
 const Produto = require('../app/models/product');
 const Category = require('../app/models/category');
-//const mongoose = require('mongoose');
 
-//Rotas para produto
-//Post=> localhost:3000/api/produtos
-router.post('/', function (req, res){
+exports.post = function (req, res){
   const category = new Category();
   category.descricao = req.body.category.description;
   category.save();
@@ -19,14 +14,13 @@ router.post('/', function (req, res){
 
   produto.save(function(error){
     if (error)
-      res.send("Erro ao tentar salvar", error);
+      res.send(`Erro ao tentar salvar, ${error}`);
 
     res.status(201).json({message: 'Produto inserido com sucesso'});
   });
-});
+};
 
-//Get=> localhost:3000/api/produtos
-router.get('/', function(req, res){
+exports.getAll = function(req, res){
   Produto.find(function(err, prods){
     if(err)
       res.send(err);
@@ -36,10 +30,9 @@ router.get('/', function(req, res){
       allProducts: prods
     });
   });
-});
+};
 
-//GetById=> localhost:3000/api/produtos/ID
-router.get('/:productId', function(req, res){
+exports.getById = function(req, res){
   const id = req.params.productId;
   Produto.findById(id, function(err, produto){
     if (err) {
@@ -57,10 +50,9 @@ router.get('/:productId', function(req, res){
       });
     }
   });
-});
+};
 
-//Put=> localhost:3000/api/produtos/ID
-router.put('/:productId', function(req, res){
+exports.put = function(req, res){
   const id = req.params.productId;
   Produto.findById(id, function(err, produto){
     if (err) {
@@ -78,7 +70,7 @@ router.put('/:productId', function(req, res){
 
       produto.save(function(error){
         if(error)
-          res.send("Erro ao tentar atualizar", error);
+          res.send(`Erro ao tentar atualizar, ${error}`);
 
         res.status(200).json({ //204
           message: 'Produto atualizado com sucesso',
@@ -87,10 +79,9 @@ router.put('/:productId', function(req, res){
       });
     }
   });
-});
+};
 
-//Delete=> localhost:3000/api/produtos/ID
-router.delete('/:productId', function(req, res){
+exports.delete = function(req, res){
   Produto.findByIdAndRemove(req.params.productId, (err, produto) => {
     if (err)
       res.status(500).send("Erro ao deletar", err)
@@ -102,6 +93,4 @@ router.delete('/:productId', function(req, res){
 
     return res.status(200).send(response);
   });
-});
-
-module.exports = router;
+};
