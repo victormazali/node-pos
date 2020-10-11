@@ -21,6 +21,8 @@ const productRoute = require('./src/routes/product-route');
 const indexRoute = require('./src/routes/index-route');
 const categoryRoute = require('./src/routes/category-route');
 const customerRoute = require('./src/routes/customer-route');
+const logRoute = require('./src/routes/log-route');
+const authRoute = require('./src/routes/auth-route')
 
 //VIncular a aplicação (app) com o motor de rotas
 // '/api' é o caminho padrão para as APIs REST
@@ -31,6 +33,8 @@ app.use('/api', indexRoute);
 app.use('/api/produtos/', productRoute);
 app.use('/api/categorias/', categoryRoute);
 app.use('/api/customers/', customerRoute);
+app.use('/api/logs/', logRoute);
+app.use('/api/auths/', authRoute)
 
 app.listen(port, () => {
   console.log("server is up and running...on port ". port);

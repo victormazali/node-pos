@@ -4,5 +4,7 @@ npm install nodemon –d
 npm install mongoose
 npm install body-parser
 
+# para iniciar
+npm run dev
 
 Babel : javascript antigo => JS6
